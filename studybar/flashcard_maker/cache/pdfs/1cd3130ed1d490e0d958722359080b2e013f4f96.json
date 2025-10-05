@@ -1,0 +1,116 @@
+[
+  {
+    "term": "Activation energy",
+    "definition": "The activation energy of a reaction (E_a) is the minimum energy which the reacting particles must possess in order to overcome the energy barrier before becoming products.",
+    "page": 4,
+    "source_id": "p4_b3"
+  },
+  {
+    "term": "Thermochemical equation",
+    "definition": "A thermochemical equation is a balanced equation that includes the enthalpy change of the reaction.",
+    "page": 4,
+    "source_id": "p4_b7"
+  },
+  {
+    "term": "Enthalpy change of formation",
+    "definition": "The enthalpy change when 1 mole of a substance is formed from its constituent elements in their standard states at 298 K and 1 bar.",
+    "page": 7,
+    "source_id": "p7_b25"
+  },
+  {
+    "term": "Enthalpy change of combustion",
+    "definition": "The heat evolved when 1 mole of a substance is completely burnt in excess oxygen at 298 K and 1 bar.",
+    "page": 8,
+    "source_id": "p8_b19"
+  },
+  {
+    "term": "Enthalpy change of neutralisation (ΔH_neut)",
+    "definition": "ΔH_neut is the heat evolved when 1 mol of H2O is formed in the neutralisation reaction between an acid and a base.",
+    "page": 13,
+    "source_id": "p13_b23"
+  },
+  {
+    "term": "Enthalpy change of atomisation (element)",
+    "definition": "The enthalpy change of atomisation for an element is the energy required when 1 mole of gaseous atoms is formed from the element in its standard state.",
+    "page": 27,
+    "source_id": "p27_b6"
+  },
+  {
+    "term": "Enthalpy change of atomisation (compound)",
+    "definition": "The enthalpy change of atomisation for a compound is the energy required to convert 1 mole of the compound into gaseous atoms.",
+    "page": 27,
+    "source_id": "p27_b16"
+  },
+  {
+    "term": "Lattice energy",
+    "definition": "Lattice energy is a measure of the strength of ionic bonding and the stability of ionic compounds; it is associated with the heat evolved in forming electrostatic attractions between oppositely charged ions (i.e. ionic bonding) and is always negative (exothermic).",
+    "page": 28,
+    "source_id": "p28_b4"
+  },
+  {
+    "term": "Born–Haber cycle",
+    "definition": "A Born–Haber cycle is an energy level diagram used to calculate lattice energy, usually presented with the ‘zero reference line’ referring to the elements in their standard states.",
+    "page": 29,
+    "source_id": "p29_b2"
+  },
+  {
+    "term": "Experimental lattice energy",
+    "definition": "Experimental lattice energy refers to the value found from experimental results using the Born–Haber cycle.",
+    "page": 31,
+    "source_id": "p31_b2"
+  },
+  {
+    "term": "Theoretical lattice energy",
+    "definition": "Theoretical lattice energy refers to the value calculated based on a model which assumes that the compound is completely ionic.",
+    "page": 31,
+    "source_id": "p31_b2"
+  },
+  {
+    "term": "Enthalpy change of hydration",
+    "definition": "The heat evolved when 1 mole of free gaseous ions is dissolved in an infinite volume of water at 298 K and 1 bar.",
+    "page": 32,
+    "source_id": "p32_b4"
+  },
+  {
+    "term": "Enthalpy change of solution",
+    "definition": "The enthalpy change when 1 mole of solute is completely dissolved in an infinite volume of solvent at 298 K and 1 bar.",
+    "page": 32,
+    "source_id": "p32_b30"
+  },
+  {
+    "term": "Entropy (S)",
+    "definition": "Entropy 'S' is a measure of the randomness or disorder in a system, reflected in the number of ways that the energy of a system can be distributed through the motion of its particles. Units: J mol⁻¹ K⁻¹.",
+    "page": 36,
+    "source_id": "p36_b3"
+  },
+  {
+    "term": "Gibbs free energy change (ΔG)",
+    "definition": "The Gibbs free energy change of reaction is given by ΔG = ΔH − TΔS.",
+    "page": 41,
+    "source_id": "p41_b6"
+  },
+  {
+    "term": "Standard Gibbs free energy change of reaction (ΔG°)",
+    "definition": "The standard Gibbs free energy change of reaction, ΔG°, is the Gibbs free energy change needed to convert reactants into products at 1 bar and at constant temperature (usually at 298 K).",
+    "page": 41,
+    "source_id": "p41_b8"
+  },
+  {
+    "term": "Exergonic (reaction)",
+    "definition": "An exergonic reaction is one that takes place spontaneously (ΔG < 0).",
+    "page": 41,
+    "source_id": "p41_b10"
+  },
+  {
+    "term": "Endergonic (reaction)",
+    "definition": "An endergonic reaction is one that cannot take place spontaneously (it is spontaneous in the reverse direction).",
+    "page": 41,
+    "source_id": "p41_b12"
+  },
+  {
+    "term": "Hess's law (law of constant heat summation)",
+    "definition": "The enthalpy change (ΔH) of a reaction is determined only by the initial and final states and is independent of the reaction pathway taken.",
+    "page": 20,
+    "source_id": "p20_b25"
+  }
+]

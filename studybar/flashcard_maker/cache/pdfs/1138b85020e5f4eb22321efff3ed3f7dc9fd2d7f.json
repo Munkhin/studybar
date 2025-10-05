@@ -1,0 +1,80 @@
+[
+  {
+    "term": "Transition element",
+    "definition": "A transition element is a d block element whose atom has an incomplete d subshell, or which can give rise to cations with an incomplete d subshell.",
+    "page": 20,
+    "source_id": "p20_b3"
+  },
+  {
+    "term": "Negative ion (anion)",
+    "definition": "A negative ion (anion) has more electrons than protons. It is represented by Xn−.",
+    "page": 7,
+    "source_id": "p7_b3"
+  },
+  {
+    "term": "Positive ion (cation)",
+    "definition": "A positive ion (cation) has fewer electrons than protons. It is represented by Xn+.",
+    "page": 7,
+    "source_id": "p7_b7"
+  },
+  {
+    "term": "Plasma",
+    "definition": "A plasma is a gaseous mixture in which the atoms have been completely stripped of their electrons, leaving bare nuclei.",
+    "page": 9,
+    "source_id": "p9_b2"
+  },
+  {
+    "term": "Relative atomic mass",
+    "definition": "The relative atomic mass of an atom is the relative mass measured against the mass of carbon-12; it is an average value that takes into account the relative abundances of all the isotopes of that element.",
+    "page": 10,
+    "source_id": "p10_b3"
+  },
+  {
+    "term": "Relative isotopic mass",
+    "definition": "The relative isotopic mass is the relative mass of a specific isotope of an element (i.e., the atomic mass of one particular isotope, measured relative to carbon-12).",
+    "page": 10,
+    "source_id": "p10_b9"
+  },
+  {
+    "term": "Electronic configuration",
+    "definition": "The electronic configuration of an atom shows the distribution of electrons in various orbitals in an atom.",
+    "page": 16,
+    "source_id": "p16_b2"
+  },
+  {
+    "term": "Aufbau (building-up) principle",
+    "definition": "Electrons in their ground states occupy orbitals in order of energy levels; the orbital with the lowest energy is always filled first.",
+    "page": 16,
+    "source_id": "p16_b2"
+  },
+  {
+    "term": "Effective nuclear charge (Zeff)",
+    "definition": "The effective nuclear charge, Zeff, is the net nuclear charge experienced by an outer electron.",
+    "page": 21,
+    "source_id": "p21_b5"
+  },
+  {
+    "term": "Isoelectronic",
+    "definition": "Species are isoelectronic if they have the same number of electrons (e.g., Na+, Mg2+, Al3+ and Si4+ each have 10 electrons and are isoelectronic).",
+    "page": 23,
+    "source_id": "p23_b11"
+  },
+  {
+    "term": "First ionisation energy",
+    "definition": "First ionisation energy is the energy needed to remove 1 mole of electrons from 1 mole of gaseous atoms to form 1 mole of unipositively charged gaseous ions.",
+    "page": 24,
+    "source_id": "p24_b4"
+  },
+  {
+    "term": "Second ionisation energy",
+    "definition": "Second ionisation energy is the energy required to remove 1 mole of electrons from 1 mole of unipositively charged gaseous ions to form 1 mole of gaseous ions with double positive charge.",
+    "page": 24,
+    "source_id": "p24_b7"
+  },
+  {
+    "term": "n-th ionisation energy",
+    "definition": "The n-th ionisation energy is the energy needed to remove 1 mole of electrons from 1 mole of gaseous ions with (n−1)+ charge to form 1 mole of gaseous ions with n+ charge.",
+    "page": 24,
+    "source_id": "p24_b9"
+  }
+]
