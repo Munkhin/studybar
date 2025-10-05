@@ -135,7 +135,7 @@ if __name__ == "__main__":
     # 1. Record the start time
     start_time = time.time()
 
-    pdf_path = "/workspaces/studybar/test_pdfs/test2.pdf"
+    pdf_path = "/workspaces/studybar/studybar/data/test_pdfs/atomic_structure.pdf"
     chunks = extract_text_chunks(pdf_path)
     make_flashcards(chunks)
 
