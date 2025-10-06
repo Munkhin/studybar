@@ -6,7 +6,6 @@ from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
 
-
 from studybar.tutor_gpt.question_generator import ProblemGenerator
 from studybar.document_embedding import BucketedIndex
 from studybar.tutor_gpt.feedback import get_feedback
@@ -17,14 +16,21 @@ load_dotenv()
 client = OpenAI()
 
 
+# ---------- absolute base data path ----------
+BASE_DATA_DIR = "/workspaces/studybar/studybar/data"
+
+
 class TutorGPT:
-    def __init__(self, student_id, subject, data_dir="data", embeddings_dir="data/embeddings"):
+    def __init__(self, student_id, subject,
+                 data_dir=BASE_DATA_DIR,
+                 embeddings_dir=os.path.join(BASE_DATA_DIR, "embeddings")):
         self.student_id = student_id
         self.subject = subject
         self.data_dir = data_dir
 
         # profile handling
-        self.profile = StudentProfile(student_id)
+        profile_path = os.path.join(BASE_DATA_DIR, "student_profiles.json")
+        self.profile = StudentProfile(student_id, db_path=profile_path)
 
         # topic embeddings and generator
         self.index = BucketedIndex(embeddings_dir)
@@ -108,7 +114,8 @@ class TutorGPT:
     def _handle_question_generation(self):
         topic = self.profile.data["last_activity"] or "atomic_structure"
         prof = self.profile.get_level(topic)
-        problems = self.generator.generate_problems(topic, n=3, difficulty=prof)
+        result = self.generator.generate_problems(topic, n=3, difficulty=prof)
+        problems = result["problems"]
         reply = "\n\n".join([f"Q{i+1}: {p['question']}" for i, p in enumerate(problems)])
         return reply
 
@@ -130,7 +137,10 @@ class TutorGPT:
         self.profile.update_level(topic, new_level)
 
         return f"Score: {score:.2f}\nFeedback: {result.get('feedback')}\nNew proficiency: {new_level:.2f}"
-LOG_FILE = "data/tutor_debug.log"
+
+
+# ---------- absolute log path ----------
+LOG_FILE = os.path.join(BASE_DATA_DIR, "tutor_debug.log")
 
 def debug_log(*args):
     with open(LOG_FILE, "a", encoding="utf-8") as f:

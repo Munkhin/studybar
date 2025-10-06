@@ -1,6 +1,7 @@
 # answer correctness, question type, original proficiency -> new proficiency
 
 import math
+import os
 
 def adjust_proficiency(current_level: float, score: float, q_type: str) -> float:
 
@@ -26,4 +27,4 @@ def adjust_proficiency(current_level: float, score: float, q_type: str) -> float
     # ---- Update and clamp ----
     new_level = current_level + change
     new_level = max(0.0, min(1.0, new_level))
-    return math.round(new_level, 4)
+    return round(new_level, 4)

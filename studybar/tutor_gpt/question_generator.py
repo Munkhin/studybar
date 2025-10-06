@@ -3,22 +3,19 @@
 import sys
 import os
 
-# 1. Get the path to the current file's directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# 2. Get the path to the parent directory by moving up one level
-parent_dir = os.path.dirname(current_dir)
-
-# 3. Add the parent directory to sys.path
-sys.path.append(parent_dir)
+# ---- Absolute Path Setup ----
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STUDYBAR_ROOT = os.path.abspath(os.path.join(BASE_DIR, "../../"))
+sys.path.append(STUDYBAR_ROOT)
 
 #-------------------------------------------#
-from document_embedding import process_pdf, BucketedIndex
+from studybar.document_embedding import process_pdf, BucketedIndex
 
 from openai import OpenAI
 from dotenv import load_dotenv
 import json
 import uuid
+import re
 
 
 load_dotenv()
@@ -55,13 +52,13 @@ class ProblemGenerator:
         system_prompt = QUESTION_GEN_PROMPT.format(n=n, topic=topic, difficulty=difficulty, contexts=ctext)
 
         response = client.responses.create(
-                model="gpt-5-mini",
-                reasoning={"effort": "low"},
-                input=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ]
-            )
+            model="gpt-5-mini",
+            reasoning={"effort": "low"},
+            input=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+        )
 
         raw = getattr(response, "output_text", "").strip()
 
@@ -74,7 +71,6 @@ class ProblemGenerator:
             return {"problems": problems, "contexts": contexts}
         except Exception:
             # try extract JSON substring
-            import re
             m = re.search(r"(\[.*\])", raw, re.S)
             if m:
                 try:
@@ -90,11 +86,12 @@ class ProblemGenerator:
 
 if __name__ == "__main__":
     # step 0: process the pdf into embeddings(should have already been done)
-    pdf_path = "/workspaces/studybar/studybar/data/test_pdfs/atomic_structure.pdf"
+    pdf_path = os.path.join(STUDYBAR_ROOT, "studybar/data/test_pdfs/atomic_structure.pdf")
     process_pdf(pdf_path)
 
     # 1. Load your bucketed embeddings
-    index = BucketedIndex("/workspaces/studybar/studybar/data/embeddings")
+    embeddings_dir = os.path.join(STUDYBAR_ROOT, "studybar/data/embeddings")
+    index = BucketedIndex(embeddings_dir)
 
     # 2. Initialize the generator
     generator = ProblemGenerator(index)

@@ -13,11 +13,16 @@ client = OpenAI()
 
 class AnswerMarker:
     def __init__(self, log_dir="data/error_logs", db_path="data/error_logs.db"):
+        # convert to absolute paths
+        base_dir = os.path.abspath(os.path.dirname(__file__))
+        log_dir = os.path.abspath(os.path.join(base_dir, "..", "..", log_dir))
+        db_path = os.path.abspath(os.path.join(base_dir, "..", "..", db_path))
+
         os.makedirs(log_dir, exist_ok=True)
         self.log_path = os.path.join(log_dir, f"errors_{datetime.now().strftime('%Y%m%d')}.jsonl")
+        self.db_path = db_path
 
         # Setup SQLite DB
-        self.db_path = db_path
         self._init_db()
 
     def _init_db(self):

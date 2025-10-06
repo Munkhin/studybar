@@ -1,6 +1,7 @@
 # pdf/img -> text,eqns,diagrams
 
 import io
+import os
 import fitz  # PyMuPDF for PDF page images
 import cv2
 import pytesseract
@@ -22,12 +23,15 @@ class OCRExtractor:
     # overall extract function
     def extract(self, file_path: str):
 
+        # ensure absolute path
+        file_path = os.path.abspath(file_path)
+
         # case 1: file is a pdf
         if file_path.lower().endswith(".pdf"):
             return self._extract_from_pdf(file_path)
         
         # case 2: file is an image
-        elif file_path.lower().endswith(".img"):
+        elif file_path.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".tiff", ".gif")):
             return self._extract_from_image(file_path)
         
         # case 3: file is not of supported types
@@ -47,8 +51,8 @@ class OCRExtractor:
         return all_pages
 
 
-
     def _extract_from_image(self, img_path: str):
+        img_path = os.path.abspath(img_path)
         img = cv2.imread(img_path)
         return self._extract_from_cv(img)
 
