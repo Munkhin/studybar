@@ -28,6 +28,7 @@ client = OpenAI()
 QUESTION_GEN_PROMPT = """
 You are a skilled teacher. Using the following context snippets, create {n} problems on the topic "{topic}" targeted at a student with mastery level {difficulty}
 (where a 0 represents a complete beginner with little to no knowledge on the topic, and 1 representing complete proficiency over individual concepts within the topic, cross concepts and cross topical items with this topic).
+There should be a mix of Multiple Choice Questions and Structured Multi Part Questions.
 
 Return a JSON array (no extra text) of objects with keys:
   - id (string)
@@ -52,7 +53,6 @@ class ProblemGenerator:
 
         # sub in variables for the propmpt
         system_prompt = QUESTION_GEN_PROMPT.format(n=n, topic=topic, difficulty=difficulty, contexts=ctext)
-        
 
         response = client.responses.create(
                 model="gpt-5-mini",
@@ -64,14 +64,14 @@ class ProblemGenerator:
             )
 
         raw = getattr(response, "output_text", "").strip()
-        
+
         # try to parse JSON directly
         try:
             problems = json.loads(raw)
             # ensure ids
             for p in problems:
                 p.setdefault("id", str(uuid.uuid4()))
-            return problems
+            return {"problems": problems, "contexts": contexts}
         except Exception:
             # try extract JSON substring
             import re
@@ -81,11 +81,11 @@ class ProblemGenerator:
                     problems = json.loads(m.group(1))
                     for p in problems:
                         p.setdefault("id", str(uuid.uuid4()))
-                    return problems
+                    return {"problems": problems, "contexts": contexts}
                 except Exception:
                     pass
             # fallback: wrap whole raw as single problem
-            return [{"id": str(uuid.uuid4()), "question": raw.strip(), "answer": "", "concepts": [topic]}]
+            return {"problems": [{"id": str(uuid.uuid4()), "question": raw.strip(), "answer": "", "concepts": [topic]}], "contexts": contexts}
 
 
 if __name__ == "__main__":
@@ -101,13 +101,15 @@ if __name__ == "__main__":
 
     # 3. Generate problems for a given topic
     topic = "atomic_structure"  # matches the filename atomic_structure.json
-    problems = generator.generate_problems(
+    result = generator.generate_problems(
         topic=topic,
         n=3,
         difficulty=0.3,   # 0 = beginner, 1 = expert
         user_prompt="Focus on basic atomic structure and subatomic particles."
     )
+    problems = result["problems"]
+    contexts = result["contexts"]
 
     # 4. Print out results
-    for p in problems:
-        print(f"\nQ: {p['question']}\nA: {p['answer']}\nConcepts: {p['concepts']}\n{'-'*60}")
+    for i, p in enumerate(problems):
+        print(f"\nQ: {p['question']}\nA: {p['answer']}\nConcepts: {p['concepts']}\nContext: {contexts[i]['text'] if i < len(contexts) else ''}\n{'-'*60}")
