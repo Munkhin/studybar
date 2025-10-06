@@ -66,8 +66,7 @@ class TutorGPT:
         """
         try:
             resp = client.responses.create(
-                model="gpt-4o-mini",
-                reasoning={"effort": "low"},
+                model="gpt-4o-nano",
                 input=prompt
             )
             intent = getattr(resp, "output_text", "").strip().lower().split()[0]
@@ -80,7 +79,7 @@ class TutorGPT:
     # ---------- LLM helper ----------
     def call_llm(self, messages):
         try:
-            params = {"model": "gpt-4o-mini", "input": messages}
+            params = {"model": "gpt-5-mini", "input": messages}
             if self.last_response_id:
                 params["previous_response_id"] = self.last_response_id
             resp = client.responses.create(**params)
