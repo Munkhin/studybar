@@ -113,7 +113,15 @@ No text outside the JSON.
 
 
 # ----------- Flashcard Generation -----------
-def make_flashcards(chunks):
+def make_flashcards(chunks, pdf_path=None):
+    """Return a list of canonical flashcards built from text chunks.
+
+    Args:
+      chunks: list of chunk dicts ({id, page, text})
+      pdf_path: optional path used by llm_filter for caching
+    Returns:
+      List of flashcards in the canonical shape: {id, front, back, page, source_id}
+    """
     # limit on length
     filtered_chunks = []
     for chunk in chunks:
@@ -127,7 +135,25 @@ def make_flashcards(chunks):
     definitions = llm_filter(candidates, pdf_path)
     print(f"[INFO] {len(definitions)} definitions extracted")
 
-    print(json.dumps(definitions, indent=2, ensure_ascii=False))
+    # Normalize LLM definitions to canonical flashcard shape
+    flashcards = []
+    for i, d in enumerate(definitions):
+        # definition likely: {term, definition, page, source_id}
+        term = d.get("term") or d.get("concept") or f"Term {i+1}"
+        definition_text = d.get("definition") or d.get("def") or ""
+        source_id = d.get("source_id") or d.get("id") or None
+        page = d.get("page") or None
+        card_id = source_id or chunk_hash(term + definition_text)[:16]
+        flashcards.append({
+            "id": card_id,
+            "front": term,
+            "back": definition_text,
+            "page": page,
+            "source_id": source_id,
+        })
+
+    print(json.dumps(flashcards, indent=2, ensure_ascii=False))
+    return flashcards
 
 
 # ----------- Main -----------

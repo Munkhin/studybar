@@ -1,3 +1,30 @@
+StudyBar
+========
+
+Quick start (development)
+
+1. Backend
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env and set OPENAI_API_KEY
+uvicorn studybar.api.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+2. Frontend
+
+```bash
+cd ui
+npm install
+npm run dev
+```
+
+Notes:
+- The backend uses OpenAI; set OPENAI_API_KEY in `.env` before running.
+- Jobs are persisted to `studybar/data/job_store.sqlite`.
 # studybar
 A study app to solve time loss and context switching.
 

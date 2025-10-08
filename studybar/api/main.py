@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from studybar.api.routes import flashcards, tutor
+from studybar.api.routes import flashcards, tutor, students
 
 app = FastAPI(title="StudyBar API", version="1.0")
 
@@ -18,6 +18,7 @@ app.add_middleware(
 # Mount routers
 app.include_router(flashcards.router, prefix="/api/flashcards", tags=["Flashcards"])
 app.include_router(tutor.router, prefix="/api/tutor", tags=["TutorGPT"])
+app.include_router(students.router, prefix="/api/students", tags=["Students"])
 
 @app.get("/")
 def root():
