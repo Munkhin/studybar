@@ -3,48 +3,36 @@
 import os
 import json
 from datetime import datetime
+from . import db
+
 
 class StudentProfile:
-    def __init__(self, student_id, db_path="data/student_profiles.json"):
+    def __init__(self, student_id, db_path=None):
         self.student_id = student_id
-        self.db_path = db_path
-        self.data = self._load_profile()
+        # migrate existing JSON if present
+        profiles_json = os.path.join(os.path.dirname(__file__), "data", "student_profiles.json")
+        if os.path.exists(profiles_json):
+            try:
+                db.migrate_profiles_json(profiles_json)
+            except Exception:
+                pass
 
-    def _load_profile(self):
-        if os.path.exists(self.db_path):
-            with open(self.db_path, "r", encoding="utf-8") as f:
-                profiles = json.load(f)
-        else:
-            profiles = {}
-
-        if self.student_id not in profiles:
-            profiles[self.student_id] = {
-                "proficiencies": {},  # topic -> level
-                "last_activity": None
-            }
-            self.data = profiles[self.student_id]  # Set self.data before saving
-            self._save_profiles(profiles)
-        else:
-            self.data = profiles[self.student_id]
-        return self.data
-
-    def _save_profiles(self, all_profiles=None):
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
-        if all_profiles is None:
-            if os.path.exists(self.db_path):
-                with open(self.db_path, "r", encoding="utf-8") as f:
-                    all_profiles = json.load(f)
-            else:
-                all_profiles = {}
-        all_profiles[self.student_id] = self.data
-        with open(self.db_path, "w", encoding="utf-8") as f:
-            json.dump(all_profiles, f, indent=2)
+        self.data = db.get_user(student_id) or {"proficiencies": {}, "last_activity": None}
 
     def get_level(self, topic):
-        return self.data["proficiencies"].get(topic, 0.0)
+        # stored proficiency in data may be 0..1 or 0..100; normalize to 0..1
+        val = self.data.get("proficiencies", {}).get(topic, 0.0)
+        try:
+            f = float(val)
+            if f > 1:
+                return f / 100.0
+            return f
+        except Exception:
+            return 0.0
 
     def update_level(self, topic, new_level):
-        self.data["proficiencies"][topic] = new_level
+        if "proficiencies" not in self.data:
+            self.data["proficiencies"] = {}
+        self.data["proficiencies"][topic] = float(new_level)
         self.data["last_activity"] = datetime.now().isoformat()
-        self._save_profiles()
+        db.upsert_user(self.student_id, self.data)
