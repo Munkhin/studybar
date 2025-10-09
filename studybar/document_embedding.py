@@ -8,7 +8,27 @@ import os, json
 import cv2
 
 load_dotenv()
-client = OpenAI()
+
+# Create the OpenAI client lazily to avoid import-time crashes when
+# the installed openai/httpx versions are incompatible or when no
+# API key is configured. Functions that need the client will call
+# get_openai_client() and raise a descriptive error if it's not
+# available.
+_client = None
+
+def get_openai_client():
+    global _client
+    if _client is not None:
+        return _client
+    try:
+        _client = OpenAI()
+        return _client
+    except Exception as e:
+        # don't crash at import time; return None and let callers
+        # handle the missing client when they attempt to use embeddings.
+        _client = None
+        print(f"[document_embedding] OpenAI client not available: {e}")
+        return None
 
 DATA_PATH = "/workspaces/studybar/studybar/data/embeddings"
 
@@ -51,6 +71,10 @@ def embed_chunks(chunks, model="text-embedding-3-large", batch_size=256):
     Add an 'embedding' vector to each chunk in-place.
     Uses the OpenAI Embeddings API via client.embeddings.create.
     """
+    client = get_openai_client()
+    if client is None:
+        raise RuntimeError("OpenAI client not available. Install/configure OpenAI SDK to use embeddings.")
+
     texts = [c["text"] for c in chunks]
     for i in range(0, len(texts), batch_size):
         batch_texts = texts[i : i + batch_size]
@@ -68,6 +92,9 @@ def embed_text(text: str, model="text-embedding-3-large"):
     """
     if not text or not text.strip():
         return np.zeros(1536, dtype=np.float32)  # default vector length
+    client = get_openai_client()
+    if client is None:
+        raise RuntimeError("OpenAI client not available. Install/configure OpenAI SDK to use embeddings.")
     resp = client.embeddings.create(model=model, input=[text])
     return np.array(resp.data[0].embedding, dtype=np.float32)
 
@@ -93,6 +120,10 @@ def embed_image(image: np.ndarray, model="clip-embedding-3-large"):
     b64_img = base64.b64encode(buf.getvalue()).decode("utf-8")
 
     # Call embeddings endpoint with image input
+    client = get_openai_client()
+    if client is None:
+        raise RuntimeError("OpenAI client not available. Install/configure OpenAI SDK to use image embeddings.")
+
     resp = client.embeddings.create(
         model=model,
         input=[

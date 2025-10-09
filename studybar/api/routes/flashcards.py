@@ -15,7 +15,7 @@ async def generate_flashcards(file: UploadFile = File(...)):
         return {"status": "cached", "data": cached}
 
     chunks = extract_text_chunks(tmp_path)
-    data = make_flashcards(chunks)
+    data = make_flashcards(chunks, pdf_path=tmp_path)
     save_cache(tmp_path, data)
 
     return {"status": "ok", "flashcards": data}

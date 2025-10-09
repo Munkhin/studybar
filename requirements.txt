@@ -1,0 +1,9 @@
+fastapi==0.101.1
+uvicorn[standard]==0.22.0
+python-dotenv==1.0.0
+openai==1.0.0
+numpy==1.26.4
+pillow==10.1.0
+PyMuPDF==1.22.5
+opencv-python-headless==4.8.1.78
+scipy==1.12.3

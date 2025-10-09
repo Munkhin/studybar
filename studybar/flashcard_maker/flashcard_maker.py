@@ -12,14 +12,15 @@ parent_dir = os.path.dirname(current_dir)
 # 3. Add the parent directory to sys.path
 sys.path.append(parent_dir)
 
-from document_embedding import extract_text_chunks
+from document_embedding import extract_text_chunks, get_openai_client
 
 import re, json, os, hashlib, time
-from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI()
+
+# Use OpenAI client lazily via document_embedding.get_openai_client to avoid
+# creating the client at import time (which can crash if SDK versions mismatch).
 
 # ----------- Directory Setup -----------
 BASE_DIR = "/workspaces/studybar/studybar/flashcard_maker"
@@ -95,6 +96,10 @@ No text outside the JSON.
     )
 
     print(f"[LLM] Sending {len(candidates)} candidate chunks to GPT...")
+    client = get_openai_client()
+    if client is None:
+        raise RuntimeError("OpenAI client not available. Configure OpenAI SDK to enable LLM-powered flashcard extraction.")
+
     response = client.responses.create(
         model="gpt-5-mini",
         reasoning={"effort": "medium"},
@@ -113,7 +118,7 @@ No text outside the JSON.
 
 
 # ----------- Flashcard Generation -----------
-def make_flashcards(chunks):
+def make_flashcards(chunks, pdf_path=None):
     # limit on length
     filtered_chunks = []
     for chunk in chunks:
@@ -123,11 +128,10 @@ def make_flashcards(chunks):
 
     candidates = filter_definition_like(filtered_chunks)
     print(f"[INFO] {len(candidates)} candidate chunks likely contain definitions")
-
     definitions = llm_filter(candidates, pdf_path)
     print(f"[INFO] {len(definitions)} definitions extracted")
-
     print(json.dumps(definitions, indent=2, ensure_ascii=False))
+    return definitions
 
 
 # ----------- Main -----------
