@@ -17,5 +17,14 @@ A study app to solve time loss and context switching.
 
 
 **UI design:**
-- [ ] 
+5 pages in total:
+- [ ] home page
+    - [✔] base layout correct
+    - [ ] adjustable background(user selects the image)
+    - [ ] dynamic welcome message(time, username, style?)
+    - [ ] time of day animation
+    - [ ] latest progress
+    - [ ] direct link to continue from where user left off
+
+
 
