@@ -18,13 +18,22 @@ A study app to solve time loss and context switching.
 
 **UI design:**
 5 pages in total:
-- [ ] home page
+- [✔] home page
     - [✔] base layout correct
-    - [ ] adjustable background(user selects the image)
-    - [ ] dynamic welcome message(time, username, style?)
-    - [ ] time of day animation
+    - [✔] dynamic background
+    - [✔] dynamic welcome message(time, username, style?)
+    - [✔] time of day animation
+    - [✔] goal setting
     - [ ] latest progress
     - [ ] direct link to continue from where user left off
+
+these two are left for now for future expansion
+
+- [ ] TutorGPT
+    - [ ] Apply the grid styling again (refactor to global for all tabs)
+    - [ ] Copy NotebookLM ui for file management
+    - [ ] Add in the subject and topic selection screen
+    - [ ] Question progress map
 
 
 

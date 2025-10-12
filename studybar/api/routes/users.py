@@ -4,6 +4,13 @@ from studybar import db
 router = APIRouter()
 
 
+@router.get("/{student_id}")
+def get_user(student_id: str):
+    user = db.get_user(student_id)
+    if not user:
+        return {"status": "error", "message": "User not found"}
+    return {"status": "ok", "user": user}
+
 @router.get("/{student_id}/progress")
 def get_progress(student_id: str):
     chapters = db.list_chapters()
