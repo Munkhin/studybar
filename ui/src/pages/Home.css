@@ -1,0 +1,44 @@
+/* main area */ 
+.main-area { 
+  background-image: url("/bg2.jpg"); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
+
+/* dynamic background based on time */
+.bg-morning {
+  background-image: url("/bg1.jpg");
+}
+
+.bg-afternoon {
+  background-image: url("/bg2.jpg");
+}
+
+.bg-evening {
+  background-image: url("/bg3.jpg");
+}
+
+/* welcome message */
+.welcome-message {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.todays-goals {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+/* responsiveness */
+@media (max-width: 800px) {
+  .home-layout {
+    grid-template-columns: 1fr; /* stack vertically */
+  }
+
+  .sidebar-area {
+    height: auto;
+  }
+}

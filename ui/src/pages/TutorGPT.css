@@ -1,0 +1,63 @@
+/* Layout container */
+.tutorgpt-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #0d0e10;
+  overflow: hidden;
+}
+
+
+.tutorgpt-sidebar {
+  width: 300px;
+  background-color: #111214;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+
+/* Main workspace container */
+.tutorgpt-main {
+  display: flex;
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background-color: #101112;
+  color: #ffffff;
+}
+
+/* Central workspace (where ChatWindow sits) */
+.tutorgpt-workspace {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+  height: 100%;
+  padding: 1rem;
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+
+/* Placeholder text when no chat */
+.tutorgpt-workspace:empty::before {
+  content: "Start chatting...";
+  opacity: 0.4;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: auto;
+  display: block;
+  pointer-events: none;
+}
+
+/* Right sidebar (floating absolute) */
+.tutorgpt-settings {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 30;
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}

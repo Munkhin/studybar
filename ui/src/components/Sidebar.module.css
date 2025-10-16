@@ -1,0 +1,106 @@
+/* Sidebar.module.css */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  color: #1f2937; /* gray-800 */
+  border-right: 1px solid #e5e7eb; /* gray-200 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .sidebar {
+  background-color: black;
+  color: #e5e7eb; /* gray-200 */
+  border-color: #1f2937; /* gray-800 */
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem; /* py-5 px-6 */
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.logoText {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;
+  color: #ff7518; /* changed color */
+}
+
+:global(.dark) .logoText {
+  color: #ff7518; /* keep same color in dark mode */
+}
+
+/* Theme toggle button */
+.themeToggle {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+:global(.dark) .themeToggle:hover {
+  background-color: #1f2937; /* gray-800 */
+}
+
+/* Navigation */
+.nav {
+  flex: 1;
+  padding: 0 0.75rem 1rem; /* px-3 pb-4 */
+  overflow-y: auto;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  color: #4b5563; /* gray-600 */
+  text-decoration: none;
+}
+
+.navLink:hover {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #111827; /* gray-900 */
+}
+
+.navLinkActive {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #111827; /* gray-900 */
+  font-weight: 500;
+}
+
+:global(.dark) .navLink {
+  color: #9ca3af; /* gray-400 */
+}
+
+:global(.dark) .navLink:hover {
+  background-color: #1f2937; /* gray-800 */
+  color: white;
+}
+
+:global(.dark) .navLinkActive {
+  background-color: #111827; /* gray-900 */
+  color: white;
+}

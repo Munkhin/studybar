@@ -1,0 +1,102 @@
+.settingsSidebar {
+  height: 100%;
+  background: #1e1f22;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+  z-index: 60;
+  pointer-events: auto;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* top row contains the expand/collapse button and keeps it visible */
+.topRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.expandBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #2b2c31;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.expandBtn:hover { background: #333; }
+
+.chev {
+  width: 18px;
+  height: 18px;
+}
+
+/* sidebar items (icons) */
+.sidebarItems {
+  margin-top: 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* bottom area with add button */
+.bottomRow {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: white;
+  color: #111;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+.addBtn:hover { transform: translateY(-2px); }
+
+/* pen icon inside add */
+.penIcon { width: 18px; height: 18px; }
+
+/* plus sign */
+.plus {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* panel that contains tab content when expanded */
+.tabContent {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  box-sizing: border-box;
+}
+
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .settingsSidebar { padding: 10px 6px; }
+  .expandBtn { width: 40px; height: 40px; }
+  .addBtn { width: 44px; height: 44px; }
+}

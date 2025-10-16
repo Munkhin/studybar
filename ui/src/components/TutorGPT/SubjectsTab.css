@@ -1,0 +1,233 @@
+.subjects-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  color: #eaeaea;
+}
+
+/* Header */
+.subjects-tab h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #f2f2f2;
+  letter-spacing: 0.3px;
+}
+
+/* Add input + button row */
+.add-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.add-row input {
+  flex: 1;
+  background: #26272b;
+  border: 1px solid #34353a;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  color: #f2f2f2;
+  font-size: 0.85rem;
+}
+
+.add-row input::placeholder {
+  color: #7a7a7a;
+}
+
+.add-row button {
+  background: #3a3b40;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #ddd;
+  transition: background 0.2s ease;
+}
+
+.add-row button:hover {
+  background: #4a4b50;
+}
+
+/* Subjects list */
+.subjects-list {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Subject item */
+.subject-item {
+  background: #2b2c31;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.subject-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.subject-header:hover {
+  background: #323338;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.subject-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #f2f2f2;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #ff6b6b;
+}
+
+/* Topics container */
+.topics-container {
+  padding: 0.5rem;
+  background: #26272b;
+  border-top: 1px solid #34353a;
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.topic-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.6rem;
+  border-radius: 4px;
+  background: #2b2c31;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.topic-item:hover {
+  background: #323338;
+}
+
+.topic-item.selected {
+  background: #3a5a7a;
+  border-color: #4a7aaa;
+}
+
+.topic-name {
+  flex: 1;
+  font-size: 0.85rem;
+  color: #ddd;
+}
+
+.general-badge {
+  font-size: 0.75rem;
+  color: #888;
+  margin-left: 0.3rem;
+}
+
+.material-count {
+  font-size: 0.75rem;
+  color: #888;
+  margin-left: 0.2rem;
+}
+
+.remove-topic-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.4rem;
+  transition: color 0.2s ease;
+  opacity: 0;
+}
+
+.topic-item:hover .remove-topic-btn {
+  opacity: 1;
+}
+
+.remove-topic-btn:hover {
+  color: #ff6b6b;
+}
+
+/* Add topic row */
+.add-topic-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.add-topic-row input {
+  flex: 1;
+  background: #2b2c31;
+  border: 1px solid #34353a;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  color: #f2f2f2;
+  font-size: 0.8rem;
+}
+
+.add-topic-row input::placeholder {
+  color: #7a7a7a;
+}
+
+.add-topic-row button {
+  background: #3a3b40;
+  border: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #ddd;
+  transition: background 0.2s ease;
+}
+
+.add-topic-row button:hover {
+  background: #4a4b50;
+}

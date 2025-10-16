@@ -1,0 +1,127 @@
+.welcome-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.9); /* Increased opacity */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(249, 232, 232, 0.653);
+}
+
+.icon-section {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3; /* above stars */
+}
+.text-section {
+  flex: 1;
+  z-index: 3; /* above stars */
+}
+.greeting {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.05;
+  color:black;
+}
+.username {
+  text-transform: capitalize;
+}
+.subtext {
+  margin-top: 6px;
+  opacity: 0.82;
+  font-size: 0.92rem;
+  color:black;
+}
+
+.sun-icon {
+  color: #ffd68a;
+  filter: drop-shadow(0 6px 12px rgba(255, 200, 100, 0.08));
+}
+.moon-icon {
+  color: #cfdcff;
+  filter: drop-shadow(0 0 20px rgba(180, 200, 255, 0.35));
+}
+.moon-glow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  filter: drop-shadow(0 0 30px rgba(160, 180, 255, 0.6));
+}
+.moon-glow::after {
+  /* soft radial halo behind the moon */
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(circle at center, rgba(160,180,255,0.18), rgba(160,180,255,0.06) 40%, transparent 60%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Stars (full-card layer) */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* behind text/icon */
+}
+.star {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.star-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.4px;
+  height: 2.4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55); /* dimmer core */
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.14);
+}
+.star-cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.36); /* dimmer cross */
+}
+.star-cross.horizontal {
+  width: 10px;
+  height: 1px;
+  border-radius: 1px;
+}
+.star-cross.vertical {
+  height: 10px;
+  width: 1px;
+  border-radius: 1px;
+}
+
+.moon-icon {
+  color: #2b2b2b; /* affects the stroke color for lucide-react icons */
+  stroke: #2b2b2b; /* ensure stroke explicitly uses it */
+  opacity: 0.95;   /* optional for softer glow contrast */
+}
+
+
+@media (max-width: 640px) {
+  .welcome-card {
+    max-width: 320px;
+  }
+  .icon-section {
+    width: 48px;
+    height: 48px;
+  }
+}

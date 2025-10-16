@@ -1,0 +1,33 @@
+/* reset to default */ 
+html, body, #root { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+} 
+  
+/* GRID LAYOUT ensures stable, responsive columns for sidebar + main area */ 
+.layout { 
+  display: grid; 
+  grid-template-columns: 300px 1fr; /* sidebar width + remaining space */ 
+  min-height: 100vh; 
+  width: 100%; /* avoid 100vw horizontal overflow */ 
+} 
+
+/* SIDEBAR AREA */ 
+.sidebar-area { 
+  background: transparent; /* stop showing any colored rim */ 
+  padding: 0; /* move padding into inner Sidebar component */ 
+  margin: 0; 
+  height: 100vh; 
+  width: 100%; 
+  overflow: hidden; 
+  /* flex removed to rely purely on grid layout */
+} 
+
+/* MAIN AREA */ 
+.main-area { 
+  overflow-y: auto; 
+  min-height: 100vh; 
+  position: relative; 
+}
