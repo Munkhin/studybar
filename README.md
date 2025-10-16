@@ -30,8 +30,8 @@ A study app to solve time loss and context switching.
 these two are left for now for future expansion
 
 - [ ] TutorGPT
-    - [ ] Apply the grid styling again (refactor to global for all tabs)
-    - [ ] Copy NotebookLM ui for file management
+    - [✔] Apply the grid styling again (refactor to global for all tabs)
+    - [] Copy NotebookLM ui for file management
     - [ ] Add in the subject and topic selection screen
     - [ ] Question progress map
 

@@ -1,0 +1,16 @@
+{
+  "name": "StudyBar Development",
+  "forwardPorts": [5000, 8080],
+  "portsAttributes": {
+    "5000": {
+      "label": "Backend API",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "8080": {
+      "label": "Frontend UI",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    }
+  }
+}

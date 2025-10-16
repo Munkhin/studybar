@@ -69,12 +69,11 @@ class AnswerMarker:
         }}
         """
 
-        resp = client.responses.create(
-            model="gpt-5-mini",
-            reasoning={"effort": "low"},
-            input=prompt,
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
         )
-        raw = getattr(resp, "output_text", "").strip()
+        raw = resp.choices[0].message.content.strip()
 
         try:
             result = json.loads(raw)

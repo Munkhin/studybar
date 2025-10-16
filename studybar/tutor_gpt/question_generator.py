@@ -51,16 +51,15 @@ class ProblemGenerator:
         # sub in variables for the propmpt
         system_prompt = QUESTION_GEN_PROMPT.format(n=n, topic=topic, difficulty=difficulty, contexts=ctext)
 
-        response = client.responses.create(
-            model="gpt-5-mini",
-            reasoning={"effort": "low"},
-            input=[
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
         )
 
-        raw = getattr(response, "output_text", "").strip()
+        raw = response.choices[0].message.content.strip()
 
         # try to parse JSON directly
         try:

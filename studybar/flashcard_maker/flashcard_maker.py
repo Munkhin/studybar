@@ -100,16 +100,15 @@ No text outside the JSON.
     if client is None:
         raise RuntimeError("OpenAI client not available. Configure OpenAI SDK to enable LLM-powered flashcard extraction.")
 
-    response = client.responses.create(
-        model="gpt-5-mini",
-        reasoning={"effort": "medium"},
-        input=[
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
         ]
     )
 
-    raw_output = getattr(response, "output_text", "").strip()
+    raw_output = response.choices[0].message.content.strip()
     match = re.search(r'(\[.*\])', raw_output, re.S)
     data = json.loads(match.group(1)) if match else []
 

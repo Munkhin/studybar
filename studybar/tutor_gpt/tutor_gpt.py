@@ -21,11 +21,13 @@ BASE_DATA_DIR = "/workspaces/studybar/studybar/data"
 
 
 class TutorGPT:
-    def __init__(self, student_id, subject,
+    def __init__(self, student_id, conversation_id,
                  data_dir=BASE_DATA_DIR,
                  embeddings_dir=os.path.join(BASE_DATA_DIR, "embeddings")):
         self.student_id = student_id
-        self.subject = subject
+        self.conversation_id = conversation_id
+        # Extract subject from conversation_id (format: "subject_topic")
+        self.subject = conversation_id.split("_")[0]
         self.data_dir = data_dir
 
         # profile handling
@@ -36,10 +38,10 @@ class TutorGPT:
         self.index = BucketedIndex(embeddings_dir)
         self.generator = ProblemGenerator(self.index)
 
-        # set up per-student conversation memory
+        # set up per-student conversation memory with conversation_id
         student_dir = os.path.join(data_dir, "students", student_id)
         os.makedirs(student_dir, exist_ok=True)
-        self.convo_path = os.path.join(student_dir, f"{subject}_conversation.jsonl")
+        self.convo_path = os.path.join(student_dir, f"{conversation_id}_conversation.jsonl")
 
         self.conversation_history = self._load_conversation()
         self.last_response_id = None
@@ -65,11 +67,11 @@ class TutorGPT:
         Respond with just the label.
         """
         try:
-            resp = client.responses.create(
-                model="gpt-4o-nano",
-                input=prompt
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}]
             )
-            intent = getattr(resp, "output_text", "").strip().lower().split()[0]
+            intent = resp.choices[0].message.content.strip().lower().split()[0]
             print(f"[DEBUG intent response]: {intent}")
             return intent
         except Exception as e:
@@ -79,12 +81,12 @@ class TutorGPT:
     # ---------- LLM helper ----------
     def call_llm(self, messages):
         try:
-            params = {"model": "gpt-5-mini", "input": messages}
-            if self.last_response_id:
-                params["previous_response_id"] = self.last_response_id
-            resp = client.responses.create(**params)
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=messages
+            )
             self.last_response_id = resp.id
-            return getattr(resp, "output_text", "").strip()
+            return resp.choices[0].message.content.strip()
         except Exception as e:
             import traceback; traceback.print_exc()
             print(f"[LLM Error] {e}")
@@ -155,7 +157,7 @@ def debug_log(*args):
 
 if __name__ == "__main__":
     import traceback
-    tutor = TutorGPT(student_id="alice", subject="chemistry")
+    tutor = TutorGPT(student_id="alice", conversation_id="chemistry_general")
     print("TutorGPT ready. Type something:")
     while True:
         try:

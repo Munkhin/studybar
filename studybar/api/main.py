@@ -10,10 +10,12 @@ app = FastAPI(title="StudyBar API", version="1.0")
 # Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # adjust later for security
+    allow_origin_regex=r"https://.*\.app\.github\.dev",  # Allow all GitHub Codespaces URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,  # Cache preflight requests for 1 hour
 )
 
 # Mount routers
